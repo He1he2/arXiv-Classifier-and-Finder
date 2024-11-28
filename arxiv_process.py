@@ -250,40 +250,40 @@ def preprocess_text(text):
 
 if __name__ == '__main__':
 
-    # file_path ="./arxiv-metadata-oai-snapshot.json"
+    file_path ="./arxiv-metadata-oai-snapshot.json"
 
-    # start_year = 2023
-    # end_year = 2024
+    start_year = 2023
+    end_year = 2024
 
-    # # 加载23~24年数据
-    # filtered_data = load_filtered_data(file_path, start_year, end_year) 
+    # 加载23~24年数据
+    filtered_data = load_filtered_data(file_path, start_year, end_year) 
 
-    # # 转换成DataFrame格式
-    # df = pd.DataFrame(filtered_data)
+    # 转换成DataFrame格式
+    df = pd.DataFrame(filtered_data)
 
-    # print("截取23~24年数据，共{}篇论文".format(len(df)))
+    print("截取23~24年数据，共{}篇论文".format(len(df)))
 
-    # df['cat_text'] = df['categories'].apply(get_cat_text)
+    df['cat_text'] = df['categories'].apply(get_cat_text)
 
-    # print("转换特征")
-    # df['title'] = df['title'].apply(clean_text)
-    # df['abstract'] = df['abstract'].apply(clean_text)
+    print("转换特征")
+    df['title'] = df['title'].apply(clean_text)
+    df['abstract'] = df['abstract'].apply(clean_text)
 
-    # print("删除换行符")
+    print("删除换行符")
 
-    # stop_words = set(stopwords.words('english'))
+    stop_words = set(stopwords.words('english'))
 
-    # df['processed_abstract'] = df['abstract'].apply(preprocess_text)
+    df['processed_abstract'] = df['abstract'].apply(preprocess_text)
 
-    # print("删除停用词")
+    print("删除停用词")
 
-    # df['text'] = df['title'] + ' {title} ' + df['processed_abstract']
+    df['text'] = df['title'] + ' {title} ' + df['processed_abstract']
 
-    # print("合并标题和摘要")
+    print("合并标题和摘要")
 
-    # df.to_json("processed_data.json", orient="records", lines=True, force_ascii=False)
+    df.to_json("processed_data.json", orient="records", lines=True, force_ascii=False)
 
-    # print("数据保存成功")
+    print("数据保存成功")
 
     
     df = pd.read_json("processed_data.json", orient="records", lines=True)
